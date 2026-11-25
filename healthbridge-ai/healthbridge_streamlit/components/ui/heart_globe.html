@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Heart-shaped Earth globe</title>
+<style>
+  *{box-sizing:border-box}
+  html,body{width:100%;height:100%;margin:0;background:#071624;color:#eef8f7;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;overflow:hidden}
+  .stage{position:relative;display:grid;place-items:center;width:100%;height:100%;min-height:320px;overflow:hidden;background:radial-gradient(ellipse at 50% 48%,#113344 0%,#091c2b 55%,#071624 100%)}
+  .stage:before,.stage:after{position:absolute;content:"";width:64%;aspect-ratio:1;border:1px solid rgba(108,215,208,.08);border-radius:50%;pointer-events:none}
+  .stage:after{width:82%;border-color:rgba(108,215,208,.045)}
+  .stars{position:absolute;inset:0;pointer-events:none}
+  .star{position:absolute;width:3px;height:3px;border-radius:50%;background:#ecfffc;box-shadow:0 0 9px 2px rgba(112,239,229,.58);opacity:.48;animation:twinkle 3.8s ease-in-out infinite alternate}
+  .star:nth-child(1){left:14%;top:20%;animation-delay:.3s}.star:nth-child(2){left:81%;top:18%;animation-delay:1.7s}.star:nth-child(3){left:22%;top:73%;animation-delay:2.2s}.star:nth-child(4){left:88%;top:64%;animation-delay:.9s}.star:nth-child(5){left:68%;top:11%;animation-delay:2.8s}.star:nth-child(6){left:9%;top:53%;animation-delay:1.2s}.star:nth-child(7){left:76%;top:84%;animation-delay:2.5s}.star:nth-child(8){left:34%;top:11%;animation-delay:.6s}
+  svg{position:relative;z-index:1;display:block;width:min(94%,450px);max-height:100%;overflow:visible;filter:drop-shadow(0 22px 42px rgba(0,0,0,.36))}
+  .heart-back{fill:#0d2734}.earth-texture{transform-box:fill-box;transform-origin:center;animation:earth-breathe 20s ease-in-out infinite alternate;filter:saturate(1.12) contrast(1.04)}
+  .heart-rim{fill:none;stroke:url(#rim);stroke-width:2.2;vector-effect:non-scaling-stroke}.heart-inner{fill:none;stroke:rgba(228,255,251,.23);stroke-width:1;vector-effect:non-scaling-stroke}
+  .heart-glow{fill:#33c4b5;opacity:.13;filter:blur(22px)}
+  .halo{fill:none;stroke:rgba(92,220,207,.17);stroke-width:1;vector-effect:non-scaling-stroke}
+  .caption{position:absolute;bottom:15px;z-index:2;color:rgba(216,242,241,.6);font-size:9px;letter-spacing:.18em;text-transform:uppercase}
+  @keyframes earth-breathe{from{transform:scale(1.035) translateX(-1.2%)}to{transform:scale(1.12) translateX(1.2%)}}
+  @keyframes twinkle{from{transform:scale(.7);opacity:.22}to{transform:scale(1.25);opacity:.92}}
+  @media(max-width:520px){.stage{min-height:300px}svg{width:min(100%,380px)}.caption{bottom:9px;font-size:8px}}
+  @media(prefers-reduced-motion:reduce){.earth-texture,.star{animation:none!important}.earth-texture{transform:none}}
+</style>
+</head>
+<body>
+<main class="stage" role="img" aria-label="A luminous heart-shaped globe with the Earth image as its surface and stars around it.">
+  <div class="stars" aria-hidden="true"><i class="star"></i><i class="star"></i><i class="star"></i><i class="star"></i><i class="star"></i><i class="star"></i><i class="star"></i><i class="star"></i></div>
+  <svg viewBox="0 0 480 455" role="presentation" aria-hidden="true">
+    <defs>
+      <path id="heart-shape" d="M240 414C216 393 61 275 48 170 38 92 87 43 157 43c39 0 67 20 83 53 16-33 44-53 83-53 70 0 119 49 109 127-13 105-168 223-192 244Z"/>
+      <clipPath id="heart-clip"><use href="#heart-shape"/></clipPath>
+      <radialGradient id="heart-fill" cx="46%" cy="38%" r="72%"><stop offset="0" stop-color="#398e98"/><stop offset=".56" stop-color="#13516b"/><stop offset="1" stop-color="#0a263d"/></radialGradient>
+      <linearGradient id="rim" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#c4fff5"/><stop offset=".46" stop-color="#50d7c9"/><stop offset="1" stop-color="#80aef2"/></linearGradient>
+      <filter id="soft-glow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="15"/></filter>
+    </defs>
+    <use href="#heart-shape" class="heart-glow" filter="url(#soft-glow)"/>
+    <use href="#heart-shape" class="heart-back"/>
+    <g clip-path="url(#heart-clip)">
+      <rect x="25" y="26" width="430" height="410" fill="url(#heart-fill)"/>
+      <image class="earth-texture" href="https://cdn.21st.dev/assets/mirror/f2/f2fe23d0c6a8406962e4c5ef969e13dc9de3faf37d3e7258a1067173325b254f.jpg" x="29" y="23" width="440" height="420" preserveAspectRatio="xMidYMid slice"/>
+      <rect x="25" y="26" width="430" height="410" fill="url(#heart-fill)" opacity=".12"/>
+      <ellipse class="halo" cx="175" cy="133" rx="130" ry="99" transform="rotate(-25 175 133)"/>
+    </g>
+    <use href="#heart-shape" class="heart-rim"/>
+    <path class="heart-inner" d="M240 398C212 374 76 270 64 169c-8-65 31-107 93-107 40 0 67 21 83 56 16-35 43-56 83-56 62 0 101 42 93 107-12 101-148 205-176 229Z"/>
+  </svg>
+  <span class="caption" aria-hidden="true">HealthBridge AI · connected care</span>
+</main>
+</body>
+</html>

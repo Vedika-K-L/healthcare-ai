@@ -1,0 +1,10 @@
+import { z } from 'zod';
+import { ok, fail } from '../utils/response.js';
+import { registerUser, authenticateUser, issueToken } from '../services/authService.js';
+const registerSchema=z.object({name:z.string().trim().min(2).max(100),email:z.string().email().max(200),password:z.string().min(8).max(128),phone:z.string().trim().max(24).optional(),role:z.enum(['patient','doctor','hospital','pharmacy','admin']),language:z.string().optional(),location:z.object({country:z.string().optional(),state:z.string().optional(),district:z.string().optional(),city:z.string().optional(),coordinates:z.object({lat:z.number(),lng:z.number()}).optional()}).optional(),specialty:z.string().optional(),registrationNumber:z.string().optional(),facilityName:z.string().optional()}).superRefine((body,ctx)=>{if(['hospital','pharmacy'].includes(body.role)&&!body.facilityName?.trim())ctx.addIssue({code:'custom',path:['facilityName'],message:'Facility name is required.'});});
+const loginSchema=z.object({email:z.string().email(),password:z.string().min(1)});
+const safeUser=u=>({id:u._id,name:u.name,email:u.email,phone:u.phone,role:u.role,language:u.language,location:u.location,isVerified:u.isVerified});
+export async function register(req,res,next){try{const body=registerSchema.parse(req.body);if(body.role==='admin')return fail(res,403,'Admin access is available through the demo account only.');const user=await registerUser(body);return ok(res,{user:safeUser(user),token:issueToken(user)},'Your account is ready.',201);}catch(e){return next(e);}}
+export async function login(req,res,next){try{const body=loginSchema.parse(req.body);const user=await authenticateUser(body.email,body.password);if(!user)return fail(res,401,'Email or password did not match.');return ok(res,{user:safeUser(user),token:issueToken(user)},'Welcome back.');}catch(e){return next(e);}}
+export function me(req,res){return ok(res,{user:safeUser(req.user)});}
+export function logout(req,res){return ok(res,null,'You have been signed out.');}
