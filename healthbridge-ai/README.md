@@ -2,7 +2,7 @@
 
 **From Your Village to the Right Healthcare Service.**
 
-HealthBridge AI is a full-stack healthcare coordination demo with a **Streamlit frontend**, an Express REST API, and MongoDB persistence. The main end-to-end demonstration plans a patient journey from Namakkal to specialist care in Chennai. The previous React + TypeScript frontend remains in `frontend/` as an optional reference; Streamlit is the hosted entry point.
+HealthBridge AI is a full-stack healthcare coordination demo with a **Streamlit frontend**, an Express REST API, and MongoDB persistence. The main end-to-end demonstration plans a patient journey from Namakkal to specialist care in Chennai. The React + TypeScript frontend in `frontend/` now uses the anatomical heart illustration on its landing page; Streamlit remains the hosted entry point.
 
 All hospitals, fees, pharmacies, availability, community events, and sample medical information supplied by the demo are fictional. The assistant provides navigation help only. It does not diagnose, recommend treatment, or prescribe medicines.
 
@@ -40,11 +40,11 @@ Open the local URL printed by Streamlit (usually `http://localhost:8501`). Set t
 ## Host on Streamlit Community Cloud
 
 1. Push this project folder to a Git repository.
-2. Create a Streamlit Community Cloud app and select `streamlit_app.py` as the entry point. Keep `requirements.txt` beside it.
+2. For this repository layout, select `healthbridge-ai/streamlit_app.py` as the Streamlit entry point and keep its adjacent `healthbridge-ai/requirements.txt`. If you publish this folder itself as the repository root, select `streamlit_app.py` instead.
 3. Deploy the existing Express API separately on a Node host and MongoDB on a hosted MongoDB service. Set the backend's `MONGODB_URI`, a strong `JWT_SECRET`, and a persistent upload directory if users will upload files.
 4. In the Streamlit app's **Settings → Secrets**, set `HEALTHBRIDGE_API_URL = "https://your-api-host.example.com/api"`.
 
-Do not put MongoDB credentials or the JWT signing key in Streamlit secrets. The Streamlit server only needs the public API URL; authenticated user requests use their session token. The supplied heart-globe Earth texture and Unsplash care photos load from their remote image URLs, so the deployed app needs outbound access to those image hosts.
+Do not put MongoDB credentials or the JWT signing key in Streamlit secrets. The Streamlit server only needs the public API URL; authenticated user requests use their session token. The anatomical heart illustration is local and does not need an external image service. The care-photo gallery uses Unsplash URLs and may be blank if those image hosts are blocked.
 
 ## Optional React frontend
 

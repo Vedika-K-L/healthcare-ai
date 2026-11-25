@@ -9,7 +9,7 @@ from zoneinfo import ZoneInfo
 import streamlit as st
 
 from healthbridge_streamlit.api_client import APIError, HealthBridgeAPI, configured_api_url
-from healthbridge_streamlit.components.ui.heart_globe import render_heart_globe
+from healthbridge_streamlit.components.ui.human_heart import render_human_heart
 from healthbridge_streamlit.copy import HOME_FEATURES, LANGUAGES, UI
 
 
@@ -133,8 +133,8 @@ def render_home(language: str, labels: dict[str, str]) -> None:
             if st.button(labels["sign_in"], use_container_width=True, key="home-login"):
                 navigate("Sign in")
     with right:
-        render_heart_globe(420)
-        st.caption("Earth image supplied by you · animated locally in a responsive, accessible heart shape.")
+        render_human_heart(420)
+        st.caption("Anatomical heart illustration · showing the chambers and major vessels.")
 
     st.markdown("### Care coordination, made clearer")
     titles = [labels["hospitals"], labels["assistant"], labels["journey"], labels["community"]]
@@ -262,7 +262,7 @@ def render_dashboard(language: str, labels: dict[str, str], user: dict[str, Any]
             writer.writerow([page_label(page, labels), page])
         st.download_button("Download safe overview (CSV)", csv_buffer.getvalue().encode("utf-8-sig"), "healthbridge-safe-overview.csv", "text/csv", key="safe-dashboard-csv")
     with right:
-        render_heart_globe(380)
+        render_human_heart(380)
 
     columns = st.columns(3, gap="small")
     for index, (page, description_key) in enumerate(ROLE_TILES.get(role, ROLE_TILES["patient"])):
@@ -823,12 +823,21 @@ def main() -> None:
         pages = ["Home", "Sign in", "Create account"]
     if st.session_state.get("hb_navigation") not in pages:
         st.session_state["hb_navigation"] = pages[0]
-    page = st.sidebar.radio("Navigate", pages, key="hb_navigation", format_func=lambda value:page_label(value, labels))
+    if st.session_state.get("hb_navigation_picker") != st.session_state["hb_navigation"]:
+        st.session_state["hb_navigation_picker"] = st.session_state["hb_navigation"]
+    page = st.sidebar.radio(
+        "Navigate",
+        pages,
+        key="hb_navigation_picker",
+        format_func=lambda value:page_label(value, labels),
+        on_change=lambda: st.session_state.update(hb_navigation=st.session_state["hb_navigation_picker"]),
+    )
+    st.session_state["hb_navigation"] = page
     try:
         health = HealthBridgeAPI(API_URL).health()
         st.sidebar.success("API connected · " + str(health.get("database", "ready")))
     except APIError:
-        st.sidebar.caption("API disconnected · configure HEALTHBRIDGE_API_URL")
+        st.sidebar.caption("API disconnected · set HEALTHBRIDGE_API_URL to your deployed backend")
     if user and st.sidebar.button(labels["sign_out"], use_container_width=True):
         try:
             api().post("/auth/logout")

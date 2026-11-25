@@ -57,3 +57,15 @@
 :root[data-theme="dark"] .hb-feature-copy strong{color:var(--ink)}:root[data-theme="dark"] .glassy-export{background:#f3fbfa;color:#123b4c}:root[data-theme="dark"] .hb-dashboard-card{background:color-mix(in srgb,var(--surface) 92%,transparent)}:root[data-theme="dark"] .hb-dashboard-card-copy strong{color:var(--ink)}:root[data-theme="dark"] .hb-notification-demo{background:var(--surface);border-color:var(--line)}:root[data-theme="dark"] .hb-toast{border-color:var(--line);background:color-mix(in srgb,var(--surface) 95%,transparent)}
 @media(prefers-reduced-motion:reduce){.hb-feature-card,.hb-dashboard-card,.hb-toast{animation:none!important;transition:none!important}.hb-feature-card:hover,.hb-dashboard-card:hover{transform:none}}
 :root[data-theme="dark"] .hb-feature-arrow,:root[data-theme="dark"] .hb-dashboard-open{color:#68d0c2}:root[data-theme="dark"] .glassy-dashboard-safety svg{color:#68d0c2}:root[data-theme="dark"] .hb-notification-examples .button{border-color:#3a6870;background:#1b3440;color:#9de0d4}:root[data-theme="dark"] .hb-toast-error .hb-toast-mark{color:#f0a19b}:root[data-theme="dark"] .hb-toast-default .hb-toast-mark{color:#8fc8e8}
+
+/* Responsive, accessible anatomical heart artwork on the public landing page. */
+.human-heart-stage{position:relative;isolation:isolate;display:grid;place-items:center;width:100%;min-height:360px;overflow:hidden;border-radius:28px;background:radial-gradient(ellipse at 50% 48%,#24101f 0%,#110b19 57%,#090611 100%);box-shadow:0 22px 48px rgba(34,10,25,.2)}
+.human-heart-stage:before,.human-heart-stage:after{position:absolute;content:"";width:64%;aspect-ratio:1;border:1px solid rgba(255,140,157,.08);border-radius:50%;pointer-events:none}.human-heart-stage:after{width:82%;border-color:rgba(255,140,157,.045)}
+.human-heart-svg{position:relative;z-index:1;display:block;width:min(94%,360px);max-height:100%;overflow:visible;filter:drop-shadow(0 0 28px rgba(255,45,75,.34));transform-box:fill-box;transform-origin:center;animation:hb-heartbeat 2.4s ease-in-out infinite}
+.human-heart-star{position:absolute;z-index:0;width:3px;height:3px;border-radius:50%;background:#ffe8e8;box-shadow:0 0 9px 2px rgba(255,126,151,.58);animation:hb-twinkle 3.8s ease-in-out infinite alternate}
+.heart-star-one{left:16%;top:24%;animation-delay:.3s}.heart-star-two{right:15%;top:21%;animation-delay:1.7s}.heart-star-three{right:24%;bottom:18%;animation-delay:2.2s}
+@keyframes hb-heartbeat{0%,100%{transform:scale(1)}8%{transform:scale(1.035)}16%{transform:scale(1)}24%{transform:scale(1.02)}36%{transform:scale(1)}}
+@keyframes hb-twinkle{from{transform:scale(.7);opacity:.22}to{transform:scale(1.25);opacity:.92}}
+.hero-art .human-heart-stage{width:100%;min-height:390px}.hero-heart{width:100%}
+@media(max-width:780px){.hero-art .human-heart-stage{min-height:330px}.hero-art .human-heart-svg{width:min(86%,310px)}}
+@media(prefers-reduced-motion:reduce){.human-heart-svg,.human-heart-star{animation:none!important}.human-heart-svg{transform:none}}

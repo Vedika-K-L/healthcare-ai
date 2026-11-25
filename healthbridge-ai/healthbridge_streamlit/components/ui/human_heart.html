@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Anatomical human heart</title>
+<style>
+*{box-sizing:border-box}html,body{width:100%;height:100%;margin:0;overflow:hidden;background:#090611;color:#fff;font-family:system-ui,sans-serif}
+.stage{position:relative;display:grid;place-items:center;width:100%;height:100%;min-height:300px;overflow:hidden;background:radial-gradient(ellipse at 50% 48%,#24101f 0%,#110b19 57%,#090611 100%)}
+.stage:before,.stage:after{position:absolute;content:"";width:64%;aspect-ratio:1;border:1px solid rgba(255,140,157,.08);border-radius:50%;pointer-events:none}.stage:after{width:82%;border-color:rgba(255,140,157,.045)}
+.stars{position:absolute;inset:0;pointer-events:none}.star{position:absolute;width:3px;height:3px;border-radius:50%;background:#ffe8e8;box-shadow:0 0 9px 2px rgba(255,126,151,.58);opacity:.48;animation:twinkle 3.8s ease-in-out infinite alternate}
+.star:nth-child(1){left:14%;top:20%;animation-delay:.3s}.star:nth-child(2){left:81%;top:18%;animation-delay:1.7s}.star:nth-child(3){left:22%;top:73%;animation-delay:2.2s}.star:nth-child(4){left:88%;top:64%;animation-delay:.9s}.star:nth-child(5){left:68%;top:11%;animation-delay:2.8s}.star:nth-child(6){left:9%;top:53%;animation-delay:1.2s}
+svg{position:relative;z-index:1;display:block;width:min(94%,390px);max-height:94%;overflow:visible;filter:drop-shadow(0 0 28px rgba(255,45,75,.3))}.beat{transform-box:fill-box;transform-origin:center;animation:heartbeat 2.4s ease-in-out infinite}.heart-outline{fill:none;stroke:rgba(255,214,207,.55);stroke-width:2;vector-effect:non-scaling-stroke}
+.caption{position:absolute;bottom:13px;z-index:2;color:rgba(255,224,225,.62);font-size:9px;letter-spacing:.16em;text-transform:uppercase}
+@keyframes heartbeat{0%,100%{transform:scale(1)}8%{transform:scale(1.035)}16%{transform:scale(1)}24%{transform:scale(1.02)}36%{transform:scale(1)}}@keyframes twinkle{from{transform:scale(.7);opacity:.22}to{transform:scale(1.25);opacity:.92}}
+@media(max-width:520px){.stage{min-height:270px}svg{width:min(100%,340px)}.caption{bottom:9px;font-size:8px}}@media(prefers-reduced-motion:reduce){.beat,.star{animation:none!important}.beat{transform:none}}
+</style></head>
+<body><main class="stage">
+<div class="stars" aria-hidden="true"><i class="star"></i><i class="star"></i><i class="star"></i><i class="star"></i><i class="star"></i><i class="star"></i></div>
+<svg viewBox="0 0 320 360" role="img" aria-labelledby="heart-title heart-desc" xmlns="http://www.w3.org/2000/svg">
+<title id="heart-title">Anatomical human heart</title><desc id="heart-desc">A glowing medical illustration showing the atria, ventricles, aorta, pulmonary artery, major veins, and coronary arteries.</desc>
+<defs><linearGradient id="muscle" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff9a91"/><stop offset=".44" stop-color="#e73f55"/><stop offset="1" stop-color="#741632"/></linearGradient><linearGradient id="artery" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffc0ad"/><stop offset="1" stop-color="#be2847"/></linearGradient><linearGradient id="vein" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#a9edff"/><stop offset="1" stop-color="#397bb9"/></linearGradient></defs>
+<g class="beat">
+<path d="M119 148C111 116 112 76 119 39M196 150C208 115 209 79 203 43" fill="none" stroke="url(#vein)" stroke-linecap="round" stroke-width="25"/><path d="M119 51V27M203 53L207 28" fill="none" stroke="#a5e9fa" stroke-linecap="round" stroke-width="15"/>
+<path d="M153 151C131 127 128 99 143 72C156 48 180 49 190 70C200 92 187 120 176 145" fill="none" stroke="url(#artery)" stroke-linecap="round" stroke-linejoin="round" stroke-width="29"/><path d="M151 72C147 54 143 40 136 29M181 69C185 51 193 40 203 31" fill="none" stroke="#f8897f" stroke-linecap="round" stroke-width="13"/>
+<path d="M158 166C143 143 128 132 108 128C91 125 78 132 68 145" fill="none" stroke="url(#vein)" stroke-linecap="round" stroke-linejoin="round" stroke-width="22"/>
+<path d="M159 145C136 119 104 117 79 135C48 157 45 201 59 239C76 283 119 323 160 347C198 326 238 290 259 249C279 210 276 164 246 139C222 118 188 121 159 145Z" fill="url(#muscle)"/>
+<path d="M82 151C99 132 126 136 145 155L151 200C131 191 109 192 88 208C76 190 74 165 82 151Z" fill="#fa887e" opacity=".94"/><path d="M174 155C194 135 220 133 240 151C251 167 249 191 239 207C218 192 195 191 169 201Z" fill="#cb3850" opacity=".96"/>
+<path d="M157 183C151 226 153 282 160 337" fill="none" stroke="#68182f" stroke-linecap="round" stroke-width="8" opacity=".82"/><path d="M91 211C111 197 133 199 151 211C148 255 152 296 160 337C129 317 101 284 85 251C79 235 81 221 91 211Z" fill="#b72c48" opacity=".76"/><path d="M169 210C190 197 215 199 235 214C244 226 239 245 229 263C211 292 186 318 160 337C166 294 168 251 169 210Z" fill="#851d39" opacity=".78"/>
+<path d="M159 177C143 193 126 204 109 213C98 220 95 233 101 245M145 202C131 219 126 238 130 257M168 187C185 198 200 208 214 224C221 233 220 244 214 253M183 202C196 220 201 237 197 253" fill="none" stroke="#ffc0ad" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"/>
+<path d="M159 145C136 119 104 117 79 135C48 157 45 201 59 239C76 283 119 323 160 347C198 326 238 290 259 249C279 210 276 164 246 139C222 118 188 121 159 145Z" class="heart-outline"/>
+</g></svg><span class="caption" aria-hidden="true">HealthBridge AI · care from the heart</span></main></body></html>
